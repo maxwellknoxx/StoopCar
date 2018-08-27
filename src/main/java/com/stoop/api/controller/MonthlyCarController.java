@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import com.stoop.api.service.impl.MonthlyCarServiceImpl;
 
 @RestController
 public class MonthlyCarController {
+	
+	private static final Logger log = LoggerFactory.getLogger(MonthlyCarController.class);
 
 	@Autowired
 	private MonthlyCarServiceImpl monthlyCarServiceImpl;
@@ -31,7 +35,13 @@ public class MonthlyCarController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		List<MonthlyCar> entityCars = monthlyCarServiceImpl.findAll();
+		List<MonthlyCar> entityCars = null;
+		try {
+			entityCars = monthlyCarServiceImpl.findAll();
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		response.setListData(entityCars);
 
@@ -48,7 +58,12 @@ public class MonthlyCarController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		entity = monthlyCarServiceImpl.findByCarPlate(dto.getCarPlate());
+		try {
+			entity = monthlyCarServiceImpl.findByCarPlate(dto.getCarPlate());
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		response.setData(entity);
 		
@@ -73,7 +88,12 @@ public class MonthlyCarController {
 		entity.setCarPlate(dto.getCarPlate());
 		entity.setOwner(dto.getOwner());
 		
-		monthlyCarServiceImpl.registerMonthlyCar(entity);
+		try {
+			monthlyCarServiceImpl.registerMonthlyCar(entity);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		return ResponseEntity.ok(response);
 	}
@@ -87,7 +107,12 @@ public class MonthlyCarController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		monthlyCarServiceImpl.removeMonthlyCar(dto.getId());
+		try {
+			monthlyCarServiceImpl.removeMonthlyCar(dto.getId());
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 
 		return ResponseEntity.ok(response);
 		

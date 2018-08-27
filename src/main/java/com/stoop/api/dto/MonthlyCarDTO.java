@@ -7,6 +7,7 @@ public class MonthlyCarDTO {
 	private String brand;
 	private String model;
 	private String carPlate;
+	private String insertDate;
 
 	public MonthlyCarDTO() {
 	}
@@ -51,10 +52,18 @@ public class MonthlyCarDTO {
 		this.carPlate = carPlate;
 	}
 
+	public String getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(String insertDate) {
+		this.insertDate = insertDate;
+	}
+
 	@Override
 	public String toString() {
 		return "MonthlyCarDTO [id=" + id + ", owner=" + owner + ", brand=" + brand + ", model=" + model + ", carPlate="
-				+ carPlate + "]";
+				+ carPlate + ", insertDate=" + insertDate + "]";
 	}
 
 }

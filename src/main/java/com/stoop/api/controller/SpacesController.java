@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,8 @@ import com.stoop.api.response.Response;
 
 @RestController
 public class SpacesController {
+	
+	private static final Logger log = LoggerFactory.getLogger(SpacesController.class);
 
 	@Autowired
 	private SpacesRepository spacesRepository;
@@ -33,7 +37,12 @@ public class SpacesController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		entities = spacesRepository.findAll();
+		try {
+			entities = spacesRepository.findAll();
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 
 		response.setListData(entities);
 
@@ -56,7 +65,13 @@ public class SpacesController {
 		entity.setTotal(dto.getTotal());
 		entity.setEmpty(dto.getEmpty());
 		entity.setBusy(dto.getBusy());
-		entity = spacesRepository.save(entity);
+		
+		try {
+			entity = spacesRepository.save(entity);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		response.setData(entity);
 		

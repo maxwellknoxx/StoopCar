@@ -1,3 +1,0 @@
-- DTO, Entity, Repository, Service, ServiceImpl, Controller
- - Payments
-  - Separated/Monthly
