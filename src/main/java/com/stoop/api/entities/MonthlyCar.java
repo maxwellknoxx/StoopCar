@@ -27,7 +27,7 @@ public class MonthlyCar {
 	@Column(name = "brand", nullable = false)
 	private String brand;
 
-	@Column(name = "modelo", nullable = false)
+	@Column(name = "model", nullable = false)
 	private String model;
 
 	@Column(name = "car_plate", nullable = false)

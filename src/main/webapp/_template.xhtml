@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+
+<h:body>
+	<div id="header">
+		<!-- <h:graphicImage library="img" name="logo.png" /> -->
+
+		<h:form rendered="#{usuarioLogado != null}">
+			<h:commandLink value="Logout" action="#{loginBean.logout}" />
+		</h:form>
+
+		<h1>
+			<ui:insert name="title"></ui:insert>
+		</h1>
+
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<h:form>
+					<p:growl id="messages" />
+
+					<p:menubar>
+						<p:submenu label="Monthly Car">
+							<p:menuitem value="Managment" url="management.jsf" />
+							<p:separator />
+							<p:menuitem value="Payments" url="#" />
+						</p:submenu>
+
+						<p:submenu label="Separated Car">
+							<p:menuitem value="Management" url="#"
+								icon="ui-icon-arrowreturnthick-1-w" />
+							<p:separator />
+							<p:menuitem value="Payments" url="#"
+								icon="ui-icon-arrowreturnthick-1-e" />
+						</p:submenu>
+
+						<p:submenu label="Registers">
+							<p:menuitem value="Entrace" url="#" />
+							<p:separator />
+							<p:menuitem value="Exit" url="#" />
+						</p:submenu>
+
+						<p:menuitem value="Management" url="#" />
+
+						<f:facet name="options">
+							<p:commandButton type="button" value="Logout"
+								icon="ui-icon-extlink" />
+						</f:facet>
+					</p:menubar>
+				</h:form>
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<div id="content">
+		<ui:insert name="content"></ui:insert>
+	</div>
+
+</h:body>
+
+</html>
