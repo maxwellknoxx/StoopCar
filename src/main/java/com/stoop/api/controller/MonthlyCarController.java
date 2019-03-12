@@ -27,7 +27,7 @@ import com.stoop.api.service.impl.MonthlyCarServiceImpl;
 @Scope(value = "session")
 @Component(value = "monthlyCarController")
 @ELBeanName(value = "monthlyCarController")
-@Join(path = "/management.jsf", to = "/management.jsf")
+@Join(path = "/managementMonthlyCar.jsf", to = "/managementMonthlyCar.jsf")
 public class MonthlyCarController {
 
 	private static final Logger log = LoggerFactory.getLogger(MonthlyCarController.class);
@@ -61,17 +61,20 @@ public class MonthlyCarController {
 	public String registerCar() {
 		monthlyCarServiceImpl.registerMonthlyCar(monthlyCar);
 		this.monthlyCar =  new MonthlyCar();
-		return "management.xhtml?faces-redirect=true";
+		return "managementMonthlyCar.xhtml?faces-redirect=true";
 	}
 	
 	public String removeRegister(MonthlyCar monthlyCar){
 		monthlyCarServiceImpl.removeMonthlyCar(monthlyCar.getId());
-		return "management.xhtml?faces-redirect=true";
+		return "managementMonthlyCar.xhtml?faces-redirect=true";
 	}
 
-	public String updateRegister(MonthlyCar monthlyCar) {
-		monthlyCarServiceImpl.registerMonthlyCar(monthlyCar);
-		return "management.xhtml?faces-redirect=true";
+	public MonthlyCar updateInformation(MonthlyCar monthlyCar) {
+		return this.monthlyCar = monthlyCar;
+	}
+	
+	public List<MonthlyCar> getAllCars(){
+		return monthlyCarServiceImpl.findAll();
 	}
 	
 	@PostMapping(value = "/api/MCController/findAll")
